@@ -17,7 +17,7 @@ ear {
     version = "1.4"  // same as the default value
     initializeInOrder = true
     description = "$rootProject.name Gradle EAR"
-    webModule("${webProject.name}-${webProject.version}.war", "/web")
+    webModule("${webProject.name}-${webProject.version}.war", "/$webProject.name")
   }
 }
 
