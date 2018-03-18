@@ -12,13 +12,22 @@ before_script:
 - sudo pip install docker-compose httpie
 - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
 script:
+# maven
+- bash mvnw
 - bash mvnw -pl ear com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:up
-- http post http://localhost:8080/web/my-servlet\?name=max
+- wait_for 8080
+- sleep 15
+- http post http://localhost:8080/web/my-servlet\?name=maven
 - bash mvnw -pl ear com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:down
-- bash gradlew
+# gradle
 - bash gradlew composeUp
-- http post http://localhost:8080/web/my-servlet\?name=maksim
+- wait_for 8080
+- sleep 15
+- http post http://localhost:8080/web/my-servlet\?name=gradle
 - bash gradlew composeDown
+# gradle (profile: maven)
 - bash gradlew -Pprofile=maven composeUp
-- http post http://localhost:8080/web/my-servlet\?name=maksimko
+- wait_for 8080
+- sleep 15
+- http post http://localhost:8080/web/my-servlet\?name=gradle-maven
 - bash gradlew -Pprofile=maven composeDown
