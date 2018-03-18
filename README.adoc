@@ -1,4 +1,4 @@
-= JBOSS 4.2.2.GA | JavaEE 5 | EJB 2.1 (Session Bean)
+= JBOSS 4.2.2.GA | JavaEE 5 | EJB 2.1 (Session Bean) image:https://travis-ci.org/daggerok/jboss422-jee5-ejb21.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/jboss422-jee5-ejb21"]
 
 Why? Don't ask...
 
