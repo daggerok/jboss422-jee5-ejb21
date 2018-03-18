@@ -1,4 +1,4 @@
-FROM daggerok/jboss:4.2.2.GA
+FROM daggerok/jboss:4.2.3.GA
 ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 "
 EXPOSE 5005
 HEALTHCHECK --timeout=2s --retries=22 \
