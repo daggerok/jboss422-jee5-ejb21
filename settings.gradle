@@ -1,0 +1,4 @@
+rootProject.name = "jboss422-jee5-ejb21"
+include "ejb"
+include "web"
+include "ear"

@@ -1,0 +1,23 @@
+buildscript {
+  ext {
+    slf4jVersion = "1.7.25"
+  }
+}
+
+plugins {
+  id "war"
+}
+
+/*
+war {
+  archiveName = "${baseName}.${extension}"
+}
+*/
+
+dependencies {
+  compileOnly(project(":ejb"))
+  compile("org.slf4j:slf4j-api:$slf4jVersion")
+  compile("org.slf4j:slf4j-jdk14:$slf4jVersion")
+}
+
+jar.enabled = false

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>daggerok</groupId>
+  <version>0.0.1</version>
+  <artifactId>jboss422-jee5-ejb21</artifactId>
+  <packaging>pom</packaging>
+
+  <properties>
+    <root.projectDir>${project.basedir}</root.projectDir>
+    <maven.compiler.target>1.5</maven.compiler.target>
+    <maven.compiler.source>${maven.compiler.target}</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <modules>
+    <module>ejb</module>
+    <module>web</module>
+    <module>ear</module>
+  </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>javaee</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>5</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <defaultGoal>clean package</defaultGoal>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ear-plugin</artifactId>
+        <version>2.10.1</version>
+        <configuration>
+<!--
+          <jboss>
+            <version>4.2</version>
+            <unauthenticated-principal>guest</unauthenticated-principal>
+            <loader-repository>daggerok:loader=ear-0.0.1.ear</loader-repository>
+            <loader-repository-config>java2ParentDelegaton=true</loader-repository-config>
+          </jboss>
+-->
+          <version>1.4</version>
+          <generateApplicationXml>true</generateApplicationXml>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+            </manifest>
+          </archive>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+          <resourceEncoding>${project.build.sourceEncoding}</resourceEncoding>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ejb-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <ejbVersion>2.1</ejbVersion>
+          <!--<generateClient>true</generateClient>-->
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.7.0</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
