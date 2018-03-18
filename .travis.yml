@@ -7,27 +7,25 @@ env:
 language: java
 install: true
 before_script:
-- sudo apt update -y || true
-- sudo apt install -y --no-install-recommends curl docker-ce python-pip
-- sudo pip install docker-compose httpie
+- sudo apt update -y || true >/dev/null 2>&1
+- sudo apt install -y --no-install-recommends curl docker-ce python-pip >/dev/null 2>&1
+- sudo pip install docker-compose httpie >/dev/null 2>&1
 - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
+- stop_any 8080 80
 script:
 # maven
-- bash mvnw
-- bash mvnw -pl ear com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:up
+- bash mvnw >/dev/null 2>&1
+- bash mvnw -pl ear com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:up >/dev/null 2>&1
 - wait_for 8080
 - sleep 25
 - http post http://localhost:8080/web/my-servlet\?name=maven
-- bash mvnw -pl ear com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:down
+- bash mvnw -pl ear com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:down >/dev/null 2>&1
 # gradle
-- bash gradlew composeUp
-- wait_for 8080
-- sleep 15
+- bash gradlew >/dev/null 2>&1
+- bash gradlew composeUp >/dev/null 2>&1
 - http post http://localhost:8080/web/my-servlet\?name=gradle
-- bash gradlew composeDown
+- bash gradlew composeDown >/dev/null 2>&1
 # gradle (profile: maven)
-- bash gradlew -Pprofile=maven composeUp
-- wait_for 8080
-- sleep 15
+- bash gradlew -Pprofile=maven composeUp >/dev/null 2>&1
 - http post http://localhost:8080/web/my-servlet\?name=gradle-maven
-- bash gradlew -Pprofile=maven composeDown
+- bash gradlew -Pprofile=maven composeDown >/dev/null 2>&1
